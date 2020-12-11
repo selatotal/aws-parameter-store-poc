@@ -7,6 +7,8 @@ dependencies {
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     compile group: 'org.springframework', name: 'spring-context', version: '4.3.30.RELEASE'
 
+    compile group: 'com.amazonaws', name: 'aws-java-sdk-ssm', version: '1.11.916'
+
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.30'
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.30'
 
@@ -14,11 +16,4 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:3.+'
     testImplementation 'org.mockito:mockito-junit-jupiter:3.+'
 
-}
-
-pitest {
-    threads = 4
-    outputFormats = ['XML', 'HTML']
-    timestampedReports = false
-    testPlugin = 'junit5'
 }
