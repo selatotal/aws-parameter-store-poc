@@ -8,4 +8,8 @@ public class ServiceValidationException extends RuntimeException {
 	public ServiceValidationException(String message) {
 		super(message);
 	}
+
+	public ServiceValidationException(RuntimeException e) {
+		super(e);
+	}
 }

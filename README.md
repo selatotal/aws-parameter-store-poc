@@ -42,6 +42,7 @@ scripts/destroy-infra.sh /tmp dev us-east-1
 ```bash
 export AWS_ACCESS_KEY_ID=your-aws-access-key-here
 export AWS_SECRET_ACCESS_KEY=your-aws-secret-access-key-here
+export AWS_DEFAULT_REGION=your-aws-region-here
 ```
 
 * Execute run.sh script
@@ -51,3 +52,39 @@ scripts/run.sh
 
 Your project will listen requests at 8080 port. Now you can test access with the following HTTP requests:
 
+### Request a parameter
+http://localhost:8080/parameter/poc-parameter-store/dev/parameter1
+```json
+{
+  "name": "/poc-parameter-store/dev/parameter1",
+  "type": "String",
+  "value": "parameter value 1"
+}
+```
+
+http://localhost:8080/parameter/poc-parameter-store/dev/parameter2
+```json
+{
+  "name": "/poc-parameter-store/dev/parameter2",
+  "type": "StringList",
+  "value": "String 1, String 2, String 3"
+}
+```
+
+### Request a path's parameters list
+
+http://localhost:8080/path/poc-parameter-store/dev
+```json
+[
+  {
+    "name": "/poc-parameter-store/dev/parameter1",
+    "type": "String",
+    "value": "parameter value 1"
+  },
+  {
+    "name": "/poc-parameter-store/dev/parameter2",
+    "type": "StringList",
+    "value": "String 1, String 2, String 3"
+  }
+]
+```

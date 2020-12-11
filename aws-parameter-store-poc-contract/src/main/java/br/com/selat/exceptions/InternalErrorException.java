@@ -6,4 +6,7 @@ public class InternalErrorException extends RuntimeException {
 		super(message);
 	}
 
+	public InternalErrorException(RuntimeException e) {
+		super(e);
+	}
 }
