@@ -1,0 +1,3 @@
+rootProject.name = "aws-parameter-store-poc"
+
+include "aws-parameter-store-poc-contract", "aws-parameter-store-poc-impl", "aws-parameter-store-poc-war"

@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven-publish'
+
+    group = 'br.com.selat'
+    version = '1.0-SNAPSHOT'
+    status = 'Integration'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
+        testImplementation("org.junit.jupiter:junit-jupiter-params:5.6.2")
+        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+    }
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
+

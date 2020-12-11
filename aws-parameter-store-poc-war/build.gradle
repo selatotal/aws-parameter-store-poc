@@ -1,0 +1,21 @@
+apply plugin: 'war'
+apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':aws-parameter-store-poc-contract')
+    compile project(':aws-parameter-store-poc-impl')
+    compile "org.glassfish.jersey.containers:jersey-container-jetty-servlet:${jersey2Version}"
+    compile "org.glassfish.jersey.containers:jersey-container-jetty-http:${jersey2Version}"
+    compile "org.glassfish.jersey.containers:jersey-container-servlet:${jersey2Version}"
+    compile "org.eclipse.jetty:jetty-webapp:${jetty94Version}"
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
+    servletContainer = 'jetty9.4'
+}
