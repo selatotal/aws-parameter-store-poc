@@ -1,8 +1,10 @@
 package br.com.selat.awsparameterstorepoc.impl.service;
 
-import br.com.selat.awsparameterstorepoc.contract.v1.ParameterOutput;
+import br.com.selat.awsparameterstorepoc.contract.v1.input.ParameterInput;
+import br.com.selat.awsparameterstorepoc.contract.v1.output.ParameterOutput;
 import br.com.selat.awsparameterstorepoc.contract.v1.ParameterService;
 import br.com.selat.exceptions.InternalErrorException;
+import br.com.selat.exceptions.ServiceValidationException;
 import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
 import com.amazonaws.services.simplesystemsmanagement.model.*;
 import org.slf4j.Logger;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 @Service
 public class ParameterServiceImpl implements ParameterService {
@@ -51,7 +55,35 @@ public class ParameterServiceImpl implements ParameterService {
     }
 
     @Override
-    public Optional<ParameterOutput> save(String parameterName, String parameterValue) {
-        return Optional.empty();
+    public Optional<ParameterOutput> save(ParameterInput parameterInput) {
+        validateParameterInput(parameterInput);
+        PutParameterRequest putParameterRequest = new PutParameterRequest()
+                .withName(parameterInput.getName())
+                .withType(parameterInput.getType())
+                .withValue(parameterInput.getValue())
+                .withOverwrite(Boolean.TRUE);
+        try {
+            awsSimpleSystemsManagement.putParameter(putParameterRequest);
+            return get(parameterInput.getName());
+        } catch (AWSSimpleSystemsManagementException e){
+            throw new InternalErrorException(e);
+        }
+    }
+
+    private void validateParameterInput(ParameterInput parameterInput){
+        if (parameterInput == null){
+            throw new ServiceValidationException("Invalid payload");
+        }
+        if (isEmpty(parameterInput.getName())){
+            throw new ServiceValidationException("Invalid name");
+        }
+        if (!"String".equals(parameterInput.getType()) &&
+            !"StringList".equals(parameterInput.getType()) &&
+            !"SecureString".equals(parameterInput.getType())){
+            throw new ServiceValidationException("Invalid type");
+        }
+        if (isEmpty(parameterInput.getValue())){
+            throw new ServiceValidationException("Invalid value");
+        }
     }
 }

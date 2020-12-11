@@ -1,15 +1,15 @@
-package br.com.selat.awsparameterstorepoc.contract.v1;
+package br.com.selat.awsparameterstorepoc.contract.v1.input;
 
-public class ParameterOutput {
+public class ParameterInput {
 
     private String name;
     private String type;
     private String value;
 
-    public ParameterOutput() {
+    public ParameterInput() {
     }
 
-    public ParameterOutput(String name, String type, String value) {
+    public ParameterInput(String name, String type, String value) {
         this.name = name;
         this.type = type;
         this.value = value;

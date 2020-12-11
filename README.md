@@ -88,3 +88,17 @@ http://localhost:8080/path/poc-parameter-store/dev
   }
 ]
 ```
+
+### Create a new Parameter
+
+You can create a new Parameter using curl to do a POST method with name, type and value.
+
+```bash
+curl --location --request POST 'http://localhost:8080/parameter' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "/poc-parameter-store/dev/parameter3",
+    "type": "StringList",
+    "value": "parameter value 1, p2, p3"
+}'
+```

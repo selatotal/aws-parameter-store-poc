@@ -1,4 +1,4 @@
-package br.com.selat.awsparameterstorepoc.contract.v1;
+package br.com.selat.awsparameterstorepoc.contract.v1.output;
 
 public class HealthOutput {
 

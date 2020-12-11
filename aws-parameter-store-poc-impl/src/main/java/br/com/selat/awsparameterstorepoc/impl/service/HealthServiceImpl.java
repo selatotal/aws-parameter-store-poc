@@ -1,6 +1,6 @@
 package br.com.selat.awsparameterstorepoc.impl.service;
 
-import br.com.selat.awsparameterstorepoc.contract.v1.HealthOutput;
+import br.com.selat.awsparameterstorepoc.contract.v1.output.HealthOutput;
 import br.com.selat.awsparameterstorepoc.contract.v1.HealthService;
 import org.springframework.stereotype.Service;
 
